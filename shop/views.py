@@ -5,5 +5,5 @@ from shop.models import product,category,cart,order
 
 # def homepage(request):
 #     home = product.objects.all()
-#     return render()
+#     return render(request,home)
 

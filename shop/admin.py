@@ -6,7 +6,7 @@ from shop.models import product,cart,category,order
 class productAdmin(admin.ModelAdmin):
     list_display = ['id','name','thumbnail','price','offer_price','tags','quantity']
 
-admin.site.register(product,productAdmin)
+admin.site.register(product,productAdmin )
 
 
 class cartAdmin(admin.ModelAdmin):
