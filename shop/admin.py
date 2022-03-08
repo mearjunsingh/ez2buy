@@ -1,25 +1,8 @@
 from django.contrib import admin
-from shop.models import product,cart,category,order
-
-# Register your models here.
-
-class productAdmin(admin.ModelAdmin):
-    list_display = ['id','name','thumbnail','price','offer_price','tags','quantity']
-
-admin.site.register(product,productAdmin )
+from shop import models
 
 
-class cartAdmin(admin.ModelAdmin):
-    list_display = [ 'user', 'products' ,'quantity', 'is_checked']
-
-admin.site.register(cart,cartAdmin)
-
-class categoryAdmin(admin.ModelAdmin):
-    list_display = [ 'id','categorys','slug' ]
-
-admin.site.register(category,categoryAdmin)
-
-class orderAdmin(admin.ModelAdmin):
-    list_display = [ 'id', 'user','productss','ordered_at','is_completed']
-
-admin.site.register(order,orderAdmin)
+admin.site.register(models.Product)
+admin.site.register(models.Order)
+admin.site.register(models.Cart)
+admin.site.register(models.Category)
