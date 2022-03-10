@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from shop.views import home_page,single_page
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('',home_page),
+    path('single/<int:slug>/',single_page, name = 'single'),
 ]
 
 if settings.DEBUG:

@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.IntegerField()
     offer_price = models.IntegerField()
     slug = models.SlugField()
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE,null=True,blank=True)
     tags = models.TextField()
     quantity = models.IntegerField()
 
