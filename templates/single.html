@@ -51,11 +51,14 @@
         <span class="text-danger"><del>{{product.offer_price }}</del></span>
       </div>
 
+      <form action="{% url 'add_to_cart' product.slug %}" method="post">
+        {% csrf_token %}
+
       <div>
         Quantity:
-        <button class="btn btn-sm btn-success" onclick="quantity_dec()">-</button>
-        <input type="text" id="quantity" value="1" class="form-control form-control-sm" readonly disabled style="text-align:center; display:inline; width: 50px;">
-        <button class="btn btn-sm btn-success" onclick="quantity_inc()">+</button>
+        <span class="btn btn-sm btn-success" onclick="quantity_dec()">-</span>
+        <input name="quantity" type="text" id="quantity" value="1" class="form-control form-control-sm" readonly style="text-align:center; display:inline; width: 50px;">
+        <span class="btn btn-sm btn-success" onclick="quantity_inc()">+</span>
       </div>
 
       <div>Available Units: <span id="units">5</span></div>
@@ -66,19 +69,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
       <hr>
-
-      <button style="background-color: aqua;">Buy Now</button> <button style="background-color: chocolate;">Add to
+      <button type="submit" class="btn btn-success">Add to
         Cart</button>
+
+      </form>
 
     </div>
     <div class="col-2">
@@ -119,7 +114,7 @@
     </div>
     <div class="card" style="width: 18rem;">
       From the same store: <br>
-      <img src="images/FP181210-VAC-1024x877.png" style="height:100px ;" class="card-img-top" alt="...">
+      <img src="{{Product.thumbnail.url}}" style="height:100px ;" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's

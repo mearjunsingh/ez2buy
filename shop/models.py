@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.IntegerField()
     offer_price = models.IntegerField()
     slug = models.SlugField()
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE,blank=True,null=True)
     tags = models.TextField()
     quantity = models.IntegerField()
 
@@ -22,6 +22,7 @@ class Product(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    slug = models.SlugField()
     quantity = models.IntegerField()
     ordered_at = models.DateTimeField(auto_now_add=True)
     is_completed = models.BooleanField()
