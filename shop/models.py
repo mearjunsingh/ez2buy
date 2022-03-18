@@ -25,6 +25,7 @@ class Order(models.Model):
     slug = models.SlugField()
     quantity = models.IntegerField()
     ordered_at = models.DateTimeField(auto_now_add=True)
+    address = models.TextField()
     is_completed = models.BooleanField()
 
     def __str__(self):

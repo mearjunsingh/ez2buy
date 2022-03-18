@@ -35,15 +35,16 @@ def add_to_cart(request, slug):
     cart.save()
     return redirect(f'/product/{slug}')
 
-def carts(request):
-    cart = Cart.objects.filter(user=request.user)
+def carts(request,slug):
+    cart = Cart.objects.get(slug=slug)
     context = {
         'cart' : cart
     }
     return render(request, 'cart.html', context)
 
-def dashboard(request):
-    order = Order.objects.filter(user=request.user)
+def dashboard(request,slug):
+    order = Order()
+    order = Order.objects.get(slug=slug)
     context = {
         'order' : order
     }

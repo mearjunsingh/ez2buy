@@ -55,7 +55,7 @@
           <div class="container">
 
             
-              <table class="table table-bordered bg-success" >
+              <table class="table table-bordered bg-primary" >
                   <tr style="margin-left: 100px;">
                       <th>S.N.</th>
                       <th>Name</th>
@@ -63,13 +63,15 @@
                       <th>Products</th>
                       <th>Quantity</th>
                   </tr>
+                  
                   <tr>
-                      <td></td>
-                      <td>{{ Order.name }}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td class="tabless" style="color: red; font-size: larger; font-weight:700">{{ order.slug }}</td>
+                      <td class="tabless">{{ order.user }}</td>
+                      <td class="tabless">{{ order.address }}</td>
+                      <td class="tabless">{{ order.product }}</td>
+                      <td class="tabless">{{ order.quantity }}</td>
                   </tr>
+                  
                   <tr>
                       <td></td>
                       <td></td>

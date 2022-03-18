@@ -8,7 +8,7 @@ urlpatterns = [
     path('product/<str:slug>/', single_product_page, name='single_product_page'),
     path('add/<str:slug>/', add_to_cart, name='add_to_cart'),
     path('carts/', carts, name='carts'),
-    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/<str:slug>/', dashboard, name='dashboard'),
     path('checkout/', checkout_page, name='checkout'),
 ]
 if settings.DEBUG:
