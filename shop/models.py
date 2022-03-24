@@ -11,9 +11,10 @@ class Product(models.Model):
     price = models.IntegerField()
     offer_price = models.IntegerField()
     slug = models.SlugField()
-    category = models.ForeignKey("Category", on_delete=models.CASCADE,blank=True,null=True)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
     tags = models.TextField()
     quantity = models.IntegerField()
+    featured = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -22,7 +23,6 @@ class Product(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    slug = models.SlugField()
     quantity = models.IntegerField()
     ordered_at = models.DateTimeField(auto_now_add=True)
     address = models.TextField()
@@ -48,3 +48,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
+
+
+class SliderImage(models.Model):
+    pass

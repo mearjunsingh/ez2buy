@@ -1,13 +1,15 @@
 from django.shortcuts import redirect, render
-from shop.models import Product, Order, Cart, Category
-from django.http import HttpResponseNotFound
+from shop.models import Product, Order, Cart, Category, SliderImage
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
 
 def index_page(request):
-    index = Product.objects.all()
+    slider_images = SliderImage()
+    featured_products = Product.objects.filter(featured=True).order_by('-id')[:4]
     context_data = {
-        'index' : index
+        'slider_images' : slider_images,
+        'featured_products' : featured_products,
     }
     return render(request, 'index.html', context_data )
 
@@ -30,10 +32,12 @@ def add_to_cart(request, slug):
         cart.is_checked_out = False
         cart.save()
         return redirect(f'/product/{slug}')
-    return HttpResponseNotFound()
+    else:
+        raise Http404
 
 
-def carts(request):
+@login_required
+def carts_page(request):
     cart = Cart.objects.filter(user=request.user)
     context = {
         'cart' : cart
@@ -41,14 +45,16 @@ def carts(request):
     return render(request, 'cart.html', context)
 
 
-def dashboard(request):
-    order = Order()
-    # order = Order.objects.get(slug=slug)
+@login_required
+def user_dashboard(request):
+    orders = Order.objects.filter(user=request.user)
     context = {
-        'order' : order
+        'orders' : orders
     }
     return render(request, 'dashboard.html', context)
 
+
+@login_required
 def checkout_page(request):
     cart = Cart.objects.filter(user=request.user)
     context = {

@@ -63,6 +63,8 @@
                       <th>Products</th>
                       <th>Quantity</th>
                   </tr>
+
+                  {% for order in orders %}
                   
                   <tr>
                       <td class="tabless" style="color: red; font-size: larger; font-weight:700">{{ order.slug }}</td>
@@ -71,14 +73,9 @@
                       <td class="tabless">{{ order.product }}</td>
                       <td class="tabless">{{ order.quantity }}</td>
                   </tr>
-                  
-                  <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                  </tr>
+
+                  {% endfor %}
+                
               </table>
 
             </div>
