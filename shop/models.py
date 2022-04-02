@@ -8,6 +8,7 @@ User = get_user_model()
 class Product(models.Model):
     name = models.CharField(max_length=80)
     thumbnail = models.ImageField()
+    description = models.TextField()
     price = models.IntegerField()
     offer_price = models.IntegerField()
     slug = models.SlugField()
