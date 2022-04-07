@@ -25,9 +25,21 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body style="background-color: rgb(237, 220, 231);">
 
   {% include 'includes/navbar.html' %}
+
+  <table width="100%">
+    <tr>
+        <td align="right">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout_page' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login_page' %}">Login</a> | <a href="{% url 'register_page' %}">Register</a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
 
 
   {% block content %}

@@ -16,6 +16,7 @@ class Product(models.Model):
     tags = models.TextField()
     quantity = models.IntegerField()
     featured = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

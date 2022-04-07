@@ -102,7 +102,7 @@
 
     <div class="col">
       <div class="card h-100">
-        <img src="{{ product.thumbnail.url }}" class="card-img-top">
+        <img src="{{ product.thumbnail.url }}"  class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.description }}</p>
@@ -134,7 +134,7 @@
 
     <div class="col">
       <div class="card h-100">
-        <img src="{{ product.thumbnail.url }}" class="card-img-top">
+        <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.description }}</p>
@@ -158,51 +158,32 @@
 <!-- OPEN JUST FOR YOU -->
 
 
+
+
 <div class="container">
   <div class="h3" style="color: red;">Just For You</div>
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-      <div class="card">
-        <img
-          src="{% static 'images/washing-machine-in-carton-cardboard-box-e-commerce-internet-online-shopping-and-delivery-concept-3d-illustration-rkj0cw.jpg' %}"
-          class="card-img-top c" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'images/webshop-thumbs.jpg' %}" class="card-img-top c" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'images/webshop-thumbs.jpg '%}" class="card-img-top c" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-            content.</"> class="card-img-top c" alt="...">
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card-body">
-        <img src="{% static 'images/webshop-thumbs.jpg '%}" class="card-img-top c" alt="...">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.</p>
-      </div>
 
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for product in active_products %}
+
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View Product</a>
+        </div>
+      </div>
     </div>
+
+    {% endfor %}
+
   </div>
+
 </div>
 </div>
 
@@ -212,7 +193,7 @@
 
 <!-- OPEN FOOTER -->
 
-<div class="container-fluid footer">
+<div class="container-fluid footer" style="background-color: aqua;">
   <div class="row">
     <div class="col">
       <div class="h5" style="color: red;">Customer Care</div>

@@ -8,10 +8,12 @@ def index_page(request):
     slider_images = SliderImage()
     featured_products = Product.objects.filter(featured=True).order_by('-id')[:6]
     new_products = Product.objects.filter(featured=False).order_by('-id')[:12]
+    active_products = Product.objects.filter(active=True).order_by('-id')[:12]
     context_data = {
         'slider_images' : slider_images,
         'featured_products' : featured_products,
-        'new_products' : new_products
+        'new_products' : new_products,
+        'active_products' : active_products 
     }
     return render(request, 'index.html', context_data )
 

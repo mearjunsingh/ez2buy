@@ -1,6 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path,include
 from shop import views as v
 
 urlpatterns = [
@@ -10,6 +11,7 @@ urlpatterns = [
     path('carts/', v.carts_page, name='carts_page'),
     path('dashboard/', v.user_dashboard, name='user_dashboard'),
     path('checkout/', v.checkout_page, name='checkout'),
+    path('', include('user.urls')),
 ]
 
 if settings.DEBUG:
