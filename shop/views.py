@@ -32,12 +32,18 @@ def single_product_page(request, slug):
 @login_required
 def add_to_cart(request, slug):
     if request.method == "POST":
-        cart = Cart()
-        cart.user = request.user
-        cart.product = Product.objects.get(slug=slug)
-        cart.quantity = request.POST.get("quantity")
-        cart.is_checked_out = False
-        cart.save()
+        product = Product.objects.get(slug=slug)
+        quantity = int(request.POST.get("quantity"))
+        try:
+            cart = Cart.objects.get(
+                user=request.user, product=product, is_checked_out=False
+            )
+            cart.quantity += quantity
+            cart.save()
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(
+                user=request.user, product=product, quantity=quantity
+            )
         return redirect(f"/product/{slug}")
     else:
         raise Http404

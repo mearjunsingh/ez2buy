@@ -2,96 +2,55 @@
 {% load static %}
 {% block content %}
 
-   
 
-    <div class="card my-3 rounded-3">
-      <div class="card-body text-center">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
-        <div class="my-2">
-          <div class="h3" style="color: blue;">Added to cart</div>
-        </div>
-      </div>
+
+<div class="card my-3 rounded-3">
+  <div class="card-body text-center">
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
+    <div class="my-2">
+      <div class="h3" style="color: blue;">Added to cart</div>
     </div>
+  </div>
+</div>
 
-    <div class="container">
-    <table class="table table-bordered bg-info" >
-      <tr style="margin-left: 100px;">
-          <th>S.N.</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-      </tr>
-      {% for product in cart %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-          <td><a href="/product/{{ product.product.slug }}">{{ product.product }}</a></td>
-          <td>{{ product.product.price }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>ds</td>
-          <td></td>
-      </tr>
+<div class="container">
+  <table class="table table-bordered bg-info">
+    <tr style="margin-left: 100px;">
+      <th>S.N.</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+    {% for product in cart %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="/product/{{ product.product.slug }}">{{ product.product }}</a></td>
 
-      {% endfor %}
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
+      {% if product.product.offer_price %}
+      <td class="price">{{ product.product.offer_price }}</td>
+      {% else %}
+      <td class="price">{{ product.product.price }}</td>
+      {% endif %}
+
+      <td class="quantity">{{ product.quantity }}</td>
+      <td class="total"></td>
+    </tr>
+
+    {% endfor %}
+
   </table>
 
 </div>
 
+<script>
+  var price = document.getElementsByClassName('price');
+  var quantity = document.getElementsByClassName('quantity');
+  var total = document.getElementsByClassName('total');
 
-
-</div>
-</div>
-
-
-<!-- OPEN FOOTER -->
-
-<div class="container-fluid footer" style="padding-top: 250px; ">
-<div class="row">
-<div class="col">
-<div class="h5" style="color: red;">Customer Care</div> <hr>
-<ul>
-<li>Help Center</li>
-<li>How to Buy</li>
-<li>Returns and Refund</li>
-<li>Contact Us</li>
-
-</ul>
-</div>
-<div class="col">
-<div class="h5" style="color: red;">About us:</div> <hr>
-Careers <br>
-Terms and Conditions <br>
-Privacy and Policy <br>
-Digital Payments <br>
-Customer service
-
-</div>
-<div class="col">
-<div class="h5" style="color: red;">Payment</div> <hr>
-</div>
-
-</div>
-</div>
-
-
-
-
-
-</div>
-</div>
+  for (var i = 0; i < price.length; i++) {
+    total[i].innerHTML = parseInt(price[i].innerHTML) * parseInt(quantity[i].innerHTML);
+  }
+</script>
 
 {% endblock %}
-
-    
-
-
-
-  
-    
