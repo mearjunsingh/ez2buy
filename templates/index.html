@@ -8,28 +8,14 @@
 <div class="container cor">
 
   <div class="row">
+
     <div class="col-2">
-      <a href="">Electronic Devices</a> <br>
-      <a href="">Electronic Accessories</a> <br>
-      <a href="">TV & Home Appliances</a> <br>
-      <a href="">Health & Beauty</a> <br>
-      <a href="">Babies & Toys</a> <br>
-      <a href="">Groceries & Pets</a> <br>
-      <a href="">Home & Lifestyle</a> <br>
-      <a href="">Men's Fashion</a> <br>
-      <a href="">Women's Fashion</a> <br>
-      <a href=""> Watches & Accessories</a><br>
-      <a href="">Sports & Outdoor</a> <br>
-      <a href="">Automotive & Motorbike</a> <br>
+      {% for cat in categories %}
+      <a href="">{{ cat.category }}</a> <br>
+      {% endfor %}
     </div>
 
-
-
     <div class="col-10">
-
-
-
-
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -65,17 +51,16 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
     </div>
+
   </div>
+
 </div>
-
-
-
 <!-- CLOSE COROUSEL -->
 
-<!-- OPEN BUTTON -->
 <hr>
+
+<!-- OPEN BUTTON -->
 <div class="container">
   <button class="btn-success"> <i class="fa fa-home" aria-hidden="true"></i> MALL</button>
   <button class="btn-danger" style="margin-left: 150px;"> <i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -88,13 +73,13 @@
     GLOBAL</button>
 
 </div>
-
 <!-- CLOSE BUTTON -->
-<hr>
-<!-- ONSALE GROUP CARDS OPEN -->
 
+<hr>
+
+<!-- ONSALE GROUP CARDS OPEN -->
 <div class="container ">
-  <div class="h3" style="color: red;">Flash Sale</div>
+  <div class="h3" style="color: red;">Featured Products</div>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -102,7 +87,7 @@
 
     <div class="col">
       <div class="card h-100">
-        <img src="{{ product.thumbnail.url }}"  class="card-img-top">
+        <img src="{{ product.thumbnail.url }}" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.description }}</p>
@@ -126,7 +111,7 @@
 
 <!-- OPEN CATEGORIES -->
 <div class="container">
-  <div class="h3" style="color: red;">Categories</div>
+  <div class="h3" style="color: red;">Latest Deals</div>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -157,9 +142,6 @@
 
 <!-- OPEN JUST FOR YOU -->
 
-
-
-
 <div class="container">
   <div class="h3" style="color: red;">Just For You</div>
 
@@ -188,40 +170,5 @@
 </div>
 
 <!-- CLOSE JUST FOR YOU -->
-
-<hr>
-
-<!-- OPEN FOOTER -->
-
-<div class="container-fluid footer" style="background-color: aqua;">
-  <div class="row">
-    <div class="col">
-      <div class="h5" style="color: red;">Customer Care</div>
-      <hr>
-      <ul>
-        <li>Help Center</li>
-        <li>How to Buy</li>
-        <li>Returns and Refund</li>
-        <li>Contact Us</li>
-
-      </ul>
-    </div>
-    <div class="col">
-      <div class="h5" style="color: red;">About us:</div>
-      <hr>
-      Careers <br>
-      Terms and Conditions <br>
-      Privacy and Policy <br>
-      Digital Payments <br>
-      Customer service
-
-    </div>
-    <div class="col">
-      <div class="h5" style="color: red;">Payment</div>
-      <hr>
-    </div>
-
-  </div>
-</div>
 
 {% endblock %}

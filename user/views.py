@@ -1,45 +1,39 @@
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.shortcuts import redirect, render
-from user.forms import LoginForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import get_user_model
 
+from .forms import LoginForm, RegisterForm
 
 User = get_user_model()
 
 
 def login_page(request):
     if request.user.is_authenticated:
-        return redirect('home_page')
-    else:
-        context = {}
-
-        form = LoginForm(request.POST or None)
-
-        context['form'] = form
-
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-
-            user = authenticate(request=request, username=username, password=password)
-
-            if user:
-                login(request, user)
-                return redirect('/')
-            else:
-                context['msg'] = 'invalid password'
-
-        return render(request, 'create.html', context)
+        return redirect("user_dashboard")
+    form = LoginForm(request=request, data=request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user_cre = authenticate(username=username, password=password)
+        login(request, user_cre)
+        if "next" in request.POST:
+            next_url = request.POST.get("next")
+            return redirect(next_url)
+        else:
+            return redirect("user_dashboard")
+    return render(request, "create.html", {"form": form})
 
 
 def logout_page(request):
     logout(request)
-    return redirect('/')
+    return redirect("index_page")
 
 
 def register_page(request):
-    form = UserCreationForm(request.POST or None)
+    if request.user.is_authenticated:
+        return redirect("user_dashboard")
+    form = RegisterForm(request.POST or None)
     if form.is_valid():
-        form.save()
-    return render(request, 'create.html', {'form' : form})
+        user = form.save()
+        login(request, user)
+        return redirect("user_dashboard")
+    return render(request, "create.html", {"form": form})

@@ -29,21 +29,42 @@
 
   {% include 'includes/navbar.html' %}
 
-  <table width="100%">
-    <tr>
-        <td align="right">
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'logout_page' %}">Logout</a>
-            {% else %}
-            <a href="{% url 'login_page' %}">Login</a> | <a href="{% url 'register_page' %}">Register</a>
-            {% endif %}
-        </td>
-    </tr>
-</table>
-
 
   {% block content %}
   {% endblock %}
+
+  <!-- OPEN FOOTER -->
+
+  <div class="container-fluid footer" style="background-color: aqua;">
+    <div class="row">
+      <div class="col">
+        <div class="h5" style="color: red;">Customer Care</div>
+        <hr>
+        <ul>
+          <li>Help Center</li>
+          <li>How to Buy</li>
+          <li>Returns and Refund</li>
+          <li>Contact Us</li>
+
+        </ul>
+      </div>
+      <div class="col">
+        <div class="h5" style="color: red;">About us:</div>
+        <hr>
+        Careers <br>
+        Terms and Conditions <br>
+        Privacy and Policy <br>
+        Digital Payments <br>
+        Customer service
+
+      </div>
+      <div class="col">
+        <div class="h5" style="color: red;">Payment</div>
+        <hr>
+      </div>
+
+    </div>
+  </div>
 
 
   <!-- Bootstrap Bundle with Popper -->
