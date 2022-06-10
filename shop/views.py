@@ -23,6 +23,15 @@ def index_page(request):
     return render(request, "index.html", context_data)
 
 
+def search_page(request):
+    products = Product.objects.filter(active=True)
+    query = request.GET.get("q")
+    if query:
+        products = products.filter(name__icontains=query)
+    context = {"products": products}
+    return render(request, "search.html", context)
+
+
 def single_product_page(request, slug):
     product = Product.objects.get(slug=slug)
     context = {"product": product}

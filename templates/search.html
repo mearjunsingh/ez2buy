@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container my-3">
+    {% if request.GET.q %}
+
+    <div class="h3" style="color: red;">Search Results: {{ request.GET.q }}</div>
+
+
+    {% endif %}
+
+    {% if products %}
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+        {% for product in products %}
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View
+                        Product</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+    {% else %}
+
+    <div class="h2 text-center my-5" style="color: red;">Products not found</div>
+
+    {% endif %}
+
+
+
+
+
+</div>
+
+
+{% endblock %}

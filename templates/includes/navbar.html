@@ -25,9 +25,9 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <form class="d-flex" style="margin-left: 100px;">
+                <form action="{% url 'search_page' %}" class="d-flex" style="margin-left: 100px;">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                        style="width: 600px;">
+                        style="width: 600px;" name="q" value="{{ request.GET.q }}">
                     <button class="btn btn-outline-success" type="submit"><i class="fa fa-search "
                             style="color:rgb(227, 238, 79);" aria-hidden="true"></i></button>
                 </form>
