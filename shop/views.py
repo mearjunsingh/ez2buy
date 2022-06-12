@@ -24,7 +24,7 @@ def index_page(request):
 
 
 def search_page(request):
-    products = Product.objects.filter(active=True)
+    products = Product.objects.all()
     query = request.GET.get("q")
     if query:
         products = products.filter(name__icontains=query)
