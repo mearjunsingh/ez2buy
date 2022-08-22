@@ -23,7 +23,7 @@
                 <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">{{ product.description|truncatewords:20 }}</p>
                 </div>
                 <div class="card-footer">
                     <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View

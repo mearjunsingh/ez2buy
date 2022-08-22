@@ -39,6 +39,11 @@
 
     {% endfor %}
 
+    <tr>
+      <td align="right" colspan="4"><strong>Grand Total:</strong></td>
+      <td align="center" id="grand_total">d</td>
+    </tr>
+
   </table>
 
 </div>
@@ -51,6 +56,16 @@
   for (var i = 0; i < price.length; i++) {
     total[i].innerHTML = parseInt(price[i].innerHTML) * parseInt(quantity[i].innerHTML);
   }
+
+  var grand_total = document.getElementById('grand_total');
+  var sum = 0;
+
+  for (var i = 0; i < price.length; i++) {
+    sum += parseInt(price[i].innerHTML) * parseInt(quantity[i].innerHTML);
+  }
+
+  grand_total.innerHTML = sum;
+
 </script>
 
 {% endblock %}

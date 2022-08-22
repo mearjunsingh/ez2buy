@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.db.models import Q
 
 from .models import Cart, Category, Order, Product
 
@@ -23,22 +24,35 @@ def index_page(request):
     return render(request, "index.html", context_data)
 
 
+def cat_page(request, slug):
+    products = Product.objects.filter(category__slug=slug)
+    context = {"products": products}
+    return render(request, "search.html", context)
+
+
 def search_page(request):
     products = Product.objects.filter(active=True)
     query = request.GET.get("q")
     if query:
-        products = products.filter(name__icontains=query)
+        products = products.filter(Q(name__icontains=query) | Q(tags__icontains=query))
     context = {"products": products}
     return render(request, "search.html", context)
 
 
 def single_product_page(request, slug):
     product = Product.objects.get(slug=slug)
-    context = {"product": product}
+    recommended_products = Product.objects.filter(category=product.category).exclude(
+        id=product.id
+    )
+
+    context = {
+        "product": product,
+        "recommended_products": recommended_products,
+    }
     return render(request, "single.html", context)
 
 
-@login_required
+@login_required(login_url="login_page")
 def add_to_cart(request, slug):
     if request.method == "POST":
         product = Product.objects.get(slug=slug)
@@ -58,21 +72,21 @@ def add_to_cart(request, slug):
         raise Http404
 
 
-@login_required
+@login_required(login_url="login_page")
 def carts_page(request):
     cart = Cart.objects.filter(user=request.user)
     context = {"cart": cart}
     return render(request, "cart.html", context)
 
 
-@login_required
+@login_required(login_url="login_page")
 def user_dashboard(request):
     orders = Order.objects.filter(user=request.user)
     context = {"orders": orders}
     return render(request, "dashboard.html", context)
 
 
-@login_required
+@login_required(login_url="login_page")
 def checkout_page(request):
     cart = Cart.objects.filter(user=request.user)
     context = {"cart": cart}

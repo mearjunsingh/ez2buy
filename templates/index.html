@@ -11,7 +11,7 @@
 
     <div class="col-2">
       {% for cat in categories %}
-      <a href="">{{ cat.category }}</a> <br>
+      <a href="{% url 'cat_page' cat.slug %}">{{ cat.category }}</a> <br>
       {% endfor %}
     </div>
 
@@ -60,23 +60,6 @@
 
 <hr>
 
-<!-- OPEN BUTTON -->
-<div class="container">
-  <button class="btn-success"> <i class="fa fa-home" aria-hidden="true"></i> MALL</button>
-  <button class="btn-danger" style="margin-left: 150px;"> <i class="fa fa-cart-plus" aria-hidden="true"></i>
-    MART</button>
-  <button class="btn-info" style="margin-left: 150px;"> <i class="fa fa-mobile" aria-hidden="true"></i> RECHARGE AND
-    SERVICES</button>
-  <button class="btn-success" style="margin-left: 150px;"> <i class="fa fa-delicious" aria-hidden="true"></i>
-    FASHION</button>
-  <button class="btn-primary" style="margin-left: 150px;"> <i class="fa fa-globe" aria-hidden="true"></i>
-    GLOBAL</button>
-
-</div>
-<!-- CLOSE BUTTON -->
-
-<hr>
-
 <!-- ONSALE GROUP CARDS OPEN -->
 <div class="container ">
   <div class="h3" style="color: red;">Featured Products</div>
@@ -90,7 +73,7 @@
         <img src="{{ product.thumbnail.url }}" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">{{ product.description|truncatewords:20 }}</p>
         </div>
         <div class="card-footer">
           <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View Product</a>
@@ -122,7 +105,7 @@
         <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">{{ product.description|truncatewords:20 }}</p>
         </div>
         <div class="card-footer">
           <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View Product</a>
@@ -154,7 +137,7 @@
         <img src="{{ product.thumbnail.url }}" height="300px" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">{{ product.description|truncatewords:20 }}</p>
         </div>
         <div class="card-footer">
           <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View Product</a>

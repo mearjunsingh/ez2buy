@@ -10,4 +10,5 @@ urlpatterns = [
     path("dashboard/", user_dashboard, name="user_dashboard"),
     path("checkout/", checkout_page, name="checkout"),
     path("search/", search_page, name="search_page"),
+    path("cat/<str:slug>/", cat_page, name="cat_page"),
 ]

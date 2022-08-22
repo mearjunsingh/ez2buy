@@ -5,3 +5,9 @@ from django.db import models
 class User(AbstractUser):
     address = models.CharField("user address", max_length=100, blank=True, null=True)
     phone = models.CharField("user phone", max_length=20, blank=True, null=True)
+    # email
+    # first_name
+    # last_name
+    # password
+    # is_active
+    # is_superuser

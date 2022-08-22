@@ -44,6 +44,10 @@
 
         <div>Available Units: <span id="units">{{ product.quantity }}</span></div>
 
+        <hr>
+        <button type="submit" class="btn btn-success">Add to
+          Cart</button>
+
         {% else %}
 
         <div>
@@ -53,9 +57,7 @@
         {% endif %}
 
 
-        <hr>
-        <button type="submit" class="btn btn-success">Add to
-          Cart</button>
+
 
       </form>
 
@@ -76,6 +78,29 @@
       {{ product.tags }}
     </div>
 
+  </div>
+</div>
+
+<div class="container">
+  <h2>Related Products:</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in recommended_products %}
+
+    <div class="col">
+      <div class="card h-100">
+        <img src="{{ product.thumbnail.url }}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'single_product_page' product.slug %}" class="btn btn-sm btn-success">View Product</a>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
   </div>
 </div>
 
