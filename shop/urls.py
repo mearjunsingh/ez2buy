@@ -11,4 +11,5 @@ urlpatterns = [
     path("checkout/", checkout_page, name="checkout"),
     path("search/", search_page, name="search_page"),
     path("cat/<str:slug>/", cat_page, name="cat_page"),
+    path("complete-checkout/", complete_checkout, name="complete_checkout"),
 ]

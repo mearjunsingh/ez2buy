@@ -3,71 +3,36 @@
 {% load static %}
 
 {% block content %}
-    
-      <div class="container" style="margin-top: 50px;">
-        <div class="row">
-          <div class="col">
-            <div class="h3" style="color: blue;">Personal Information</div><hr>
-            <input type="text" placeholder="First Name" style="width: 300px;"> <input type="text" style="width: 300px;" placeholder="Last Name" id=""> <br> <br>
-            <input type="email" placeholder="Email" style="width: 605px;"><br> <br> 
-            <input type="text" placeholder="Country" style="width: 300px;"  id=""> <br> <br>
-            <input type="text" placeholder="Zip code" style="width: 300px;"> <br><br>
-            <input type="integer" placeholder="Number" id="" style="width: 605px;">
-          </div>
-          <div class="col">
-           <div class="h3" style="color: blue;">Your Order:</div> <hr>
-            <br>
-            <div class="h6">
-            Product cost : Rs. <br> <br>
-            Value :   Rs.  <br> <br>
-            Total Purchase : Rs. <br> <br>
-            Esstimated Tax : Rs.  <br> <br> <hr>
-            Total : Rs.
-          </div>
-          </div>
-        </div>
 
-        <hr>
-        <div class="h3" style="color: blue;">Payment Details: </div>
-        <input type="integer" value="0000 0000 0000" style="width: 300px;" ><i class="fa fa-cc-visa" aria-hidden="true"></i> <br> <br>
-        <input type="integer" value="Security code" id="" style="width: 300px;"> <br> <br>
-        <input type="integer" value="Expired Date" id="" style="width: 300px;"> <br> <br>
-        <button class="btn-success" style="align-content: center;" >Complete Purchase</button>
-      </div>
-
-        <!-- OPEN FOOTER -->
-
-  <div class="container-fluid footer" style="padding-top: 150px;">
-    <div class="row">
-      <div class="col">
-        <div class="h5" style="color: red;">Customer Care</div> <hr>
-        <ul>
-          <li>Help Center</li>
-          <li>How to Buy</li>
-          <li>Returns and Refund</li>
-          <li>Contact Us</li>
-
-        </ul>
-      </div>
-      <div class="col">
-        <div class="h5" style="color: red;">About us:</div> <hr>
-        Careers <br>
-        Terms and Conditions <br>
-        Privacy and Policy <br>
-        Digital Payments <br>
-        Customer service
-
-      </div>
-      <div class="col">
-      <div class="h5" style="color: red;">Payment</div> <hr>
+<div class="container" style="margin-top: 50px;">
+  <div class="row">
+    <div class="col">
+      <div class="h3" style="color: blue;">Personal Information</div>
+      <hr>
+      <input type="text" placeholder="First Name" style="width: 300px;"> <input type="text" style="width: 300px;"
+        placeholder="Last Name" id=""> <br> <br>
+      <input type="email" placeholder="Email" style="width: 605px;"><br> <br>
+      <input type="text" placeholder="Country" style="width: 300px;" id=""> <br> <br>
+      <input type="text" placeholder="Zip code" style="width: 300px;"> <br><br>
+      <input type="integer" placeholder="Number" id="" style="width: 605px;">
     </div>
-
+    <div class="col">
+      <div class="h3" style="color: blue;">Your Order:</div>
+      <hr>
+      <br>
+      <div class="h6">
+        Product cost : Rs. <span id="lead fw-bold">{{ total_amount }}</span>
+      </div>
     </div>
   </div>
 
-  <!-- CLOSE FOOTER -->
-    
-    
-      <!-- NAVBAR CLOSE -->
+  <hr>
+  <div class="h3" style="color: blue;">Payment Details: </div>
+  <input type="integer" value="0000 0000 0000" style="width: 300px;"><i class="fa fa-cc-visa" aria-hidden="true"></i>
+  <br> <br>
+  <input type="integer" value="Security code" id="" style="width: 300px;"> <br> <br>
+  <input type="integer" value="Expired Date" id="" style="width: 300px;"> <br> <br>
+  <a class="btn btn-success" href="/complete-checkout">Complete Purchase</a>
+</div>
 
- {% endblock %}
+{% endblock %}

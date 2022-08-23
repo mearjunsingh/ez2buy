@@ -15,46 +15,8 @@
     </div>
     <div style="height: 400px;" class="col bg-light rounded-bottom">
       <!-- <div style="height: 900px;" class="col bg-light rounded-bottom"></div> -->
-      <div class="row">
 
-        <div class="mt-2 col-sm-6 col-md-6 col-lg-3">
-          <div class="card shadow rounded-3">
-            <div class="card-body text-center">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
-              <div class="mt-2">
-                <span class="lead">Number of products</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div class="mt-2 col-sm-6 col-md-6 col-lg-3">
-          <div class="card shadow rounded-3 ">
-            <div class="card-body text-center">
-              <i class="fa fa-sitemap" aria-hidden="true"></i><br>
-              <div class="mt-2">
-                <span class="lead">Buying Products</span>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-        <div class="mt-2 col-sm-6 col-md-6 col-lg-3">
-          <div class="card shadow rounded-3">
-            <div class="card-body text-center">
-              <i class="fa fa-check-square" aria-hidden="true"></i><br>
-              <div class="mt-2">
-                <span class="lead"> Total Products</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <h1>Hello {{ request.user }} </h1>
       <hr>
       <div class="col">
         <div class="container">
@@ -63,20 +25,20 @@
           <table class="table table-bordered bg-primary">
             <tr style="margin-left: 100px;">
               <th>S.N.</th>
-              <th>Name</th>
               <th>Address</th>
               <th>Products</th>
               <th>Quantity</th>
+              <th>Is Delivered</th>
             </tr>
 
             {% for order in orders %}
 
             <tr>
               <td class="tabless" style="color: red; font-size: larger; font-weight:700">{{ order.slug }}</td>
-              <td class="tabless">{{ order.user }}</td>
               <td class="tabless">{{ order.address }}</td>
               <td class="tabless">{{ order.product }}</td>
               <td class="tabless">{{ order.quantity }}</td>
+              <td class="tabless">{% if order.is_shipped %}Yes{% else %}No{% endif %}</td>
             </tr>
 
             {% endfor %}

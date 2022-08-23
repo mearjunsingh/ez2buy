@@ -57,16 +57,21 @@ def add_to_cart(request, slug):
     if request.method == "POST":
         product = Product.objects.get(slug=slug)
         quantity = int(request.POST.get("quantity"))
-        try:
-            cart = Cart.objects.get(
-                user=request.user, product=product, is_checked_out=False
-            )
-            cart.quantity += quantity
-            cart.save()
-        except Cart.DoesNotExist:
-            cart = Cart.objects.create(
-                user=request.user, product=product, quantity=quantity
-            )
+        if product.quantity >= quantity:
+            try:
+                cart = Cart.objects.get(
+                    user=request.user, product=product, is_checked_out=False
+                )
+                cart.quantity += quantity
+                product.quantity -= quantity
+                product.save()
+                cart.save()
+            except Cart.DoesNotExist:
+                cart = Cart.objects.create(
+                    user=request.user, product=product, quantity=quantity
+                )
+                product.quantity -= quantity
+                product.save()
         return redirect(f"/product/{slug}")
     else:
         raise Http404
@@ -74,7 +79,7 @@ def add_to_cart(request, slug):
 
 @login_required(login_url="login_page")
 def carts_page(request):
-    cart = Cart.objects.filter(user=request.user)
+    cart = Cart.objects.filter(user=request.user, is_checked_out=False)
     context = {"cart": cart}
     return render(request, "cart.html", context)
 
@@ -88,6 +93,25 @@ def user_dashboard(request):
 
 @login_required(login_url="login_page")
 def checkout_page(request):
-    cart = Cart.objects.filter(user=request.user)
-    context = {"cart": cart}
+    cart = Cart.objects.filter(user=request.user, is_checked_out=False)
+    total_amount = 0
+    for item in cart:
+        if item.product.offer_price:
+            total_amount += item.product.offer_price * item.quantity
+        else:
+            total_amount += item.product.price * item.quantity
+
+    context = {"cart": cart, "total_amount": total_amount}
     return render(request, "checkout.html", context)
+
+
+@login_required(login_url="login_page")
+def complete_checkout(request):
+    cart = Cart.objects.filter(user=request.user, is_checked_out=False)
+    for item in cart:
+        item.is_checked_out = True
+        item.save()
+        Order.objects.create(
+            user=request.user, product=item.product, quantity=item.quantity
+        )
+    return redirect("user_dashboard")
